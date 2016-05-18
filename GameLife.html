@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <title>Game Live 1</title>
+	<link rel="stylesheet" href="game_live.css"> 
+	<script src="game_life.js"></script>
+  </head>
+  <body>	
+		
+	<span id="mySpan"></span>
+	<h1 style="text-align:center; color: blue; ">
+		<input type="text" id="height1" style="height:30px; width:50px;" placeholder="Enter" value=""/>&lt; i i &lt;
+		<input type="text" id="height2" style="height:30px; width:50px;" placeholder="Enter" value=""/>
+	</h1>
+
+	<div style="text-align:center">
+		<button type="button" id="button" onclick="start()" style="height:30px; width:150px; color: blue;">Start!</button>
+		<button type="button" id="button" onclick="stop(stopInt)" style="height:30px; width:150px; color: red;">Stop!</button>
+	</div>
+
+	<h1 style="text-align:center; color: blue;">
+		<input type="text" id="width1" style="height:30px; width:50px;" placeholder="Enter" value=""/>&lt; j j &lt;
+		<input type="text" id="width2" style="height:30px; width:50px;" placeholder="Enter" value=""/>
+	</h1>	
+
+	<table id="viewport" cellpadding="0" cellspacing="0" 
+	style="border:1px solid;">
+	</table>
+  
+  </body>
+</html>
