@@ -59,8 +59,8 @@ function initialize(x) {
 }
 
 function controller() {
-	data = business_logic_life(data);
 	present(data, viewport);
+	data = business_logic_life(data);
 }
 
 function business_logic_test(data) {
