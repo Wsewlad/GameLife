@@ -63,19 +63,6 @@ function controller() {
 	data = business_logic_life(data);
 }
 
-function business_logic_test(data) {
-	for (i = 0; i < data.length; i++) {
-		for (var j = 0; j < data[i].length; j++) {
-			if (i == j){
-				data[i][j] = "red";
-			} else {
-				data[i][j] = "white";
-			}
-		}
-	}
-	return data;
-}
-
 function business_logic_life(data) {
 	var w = data[0].length;
 	var h = data.length;
