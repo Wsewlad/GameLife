@@ -7,6 +7,22 @@ window.onload = function() {
 	document.getElementById("mySpan").innerHTML = height + "x" + width;
 }
 
+function disable_button(buttonName) {
+	document.getElementById(buttonName).disabled = true;
+	document.getElementById(buttonName).style.cursor = "not-allowed";
+	document.getElementById(buttonName).style.opacity = 0.6;
+}
+
+function disabled_button_start() {
+	disable_button("buttonStart");
+    document.getElementById("buttonStop").disabled = false;
+	start();
+}
+function disabled_button_stop() {
+	disable_button("buttonStop");
+	stop(stopInt);
+}
+
 function populate_table(table, height, width) {
 	for (var i = 0; i < height; i++) {
 		var row = document.createElement("tr");
