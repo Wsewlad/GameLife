@@ -7,6 +7,20 @@ window.onload = function() {
 	document.getElementById("mySpan").innerHTML = height + "x" + width;
 }
 
+function myDisabled() {
+	document.getElementById("button1").disabled = true;
+    document.getElementById("button2").disabled = false;
+	document.getElementById("button1").style.cursor = "not-allowed";
+	document.getElementById("button1").style.opacity = 0.6;
+	start();
+}
+function myDisabled2() {
+	document.getElementById("button2").disabled = true;
+	document.getElementById("button2").style.cursor = "not-allowed";
+	document.getElementById("button2").style.opacity = 0.6;
+	stop(stopInt);
+}
+
 function populate_table(table, height, width) {
 	for (var i = 0; i < height; i++) {
 		var row = document.createElement("tr");
