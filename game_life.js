@@ -7,17 +7,19 @@ window.onload = function() {
 	document.getElementById("mySpan").innerHTML = height + "x" + width;
 }
 
-function myDisabled() {
-	document.getElementById("button1").disabled = true;
-    document.getElementById("button2").disabled = false;
-	document.getElementById("button1").style.cursor = "not-allowed";
-	document.getElementById("button1").style.opacity = 0.6;
+function disable_button(buttonName) {
+	document.getElementById(buttonName).disabled = true;
+	document.getElementById(buttonName).style.cursor = "not-allowed";
+	document.getElementById(buttonName).style.opacity = 0.6;
+}
+
+function disabled_button_start() {
+	disable_button("buttonStart");
+    document.getElementById("buttonStop").disabled = false;
 	start();
 }
-function myDisabled2() {
-	document.getElementById("button2").disabled = true;
-	document.getElementById("button2").style.cursor = "not-allowed";
-	document.getElementById("button2").style.opacity = 0.6;
+function disabled_button_stop() {
+	disable_button("buttonStop");
 	stop(stopInt);
 }
 
