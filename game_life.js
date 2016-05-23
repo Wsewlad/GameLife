@@ -3,6 +3,11 @@ var height = 10;
 var width = 10;
 var data;
 var stopInt;
+//перезавантажує сторінку
+function reload() {
+    location.reload();
+}
+
 window.onload = function() { //виводить напис з розмірами таблиці
 	document.getElementById("mySpan").innerHTML = height + "x" + width;
 }
