@@ -3,7 +3,7 @@ var height = 10;
 var width = 10;
 var data;
 var stopInt;
-window.onload = function() {
+window.onload = function() { //виводить напис з розмірами таблиці
 	document.getElementById("mySpan").innerHTML = height + "x" + width;
 }
 
@@ -12,7 +12,7 @@ function disable_button(buttonName) {
 	document.getElementById(buttonName).style.cursor = "not-allowed";
 	document.getElementById(buttonName).style.opacity = 0.6;
 }
-
+//переводить кнопку в активний або пасивний стан та викликає дод. функц.
 function disabled_button_start() {
 	disable_button("buttonStart");
     document.getElementById("buttonStop").disabled = false;
@@ -21,6 +21,20 @@ function disabled_button_start() {
 function disabled_button_stop() {
 	disable_button("buttonStop");
 	stop(stopInt);
+}
+
+ //перевірка данних на коректність
+function check_input() {
+	var height1 = document.getElementById("height1").value;
+	var height2 = document.getElementById("height2").value;
+	var width1 = document.getElementById("width1").value;
+	var width2 = document.getElementById("width2").value;
+	if (height1 < 0 || width1 < 0) {
+		alert("You have entered wrong value in fields for 'i' or 'j' !!! Value for 'i' or 'j' must be >= 0. ");
+	} if (height2 > height || width2 > width) {
+		alert("You have entered wrong value in fields for 'i' or 'j' !!! Value for 'i' must be <= " + height + "." + 
+			  " Value for 'j' must be <= " + width + ".");
+	}	
 }
 
 function populate_table(table, height, width) {
@@ -52,13 +66,14 @@ function initialize(x) {
 	var height2 = document.getElementById("height2").value;
 	var width1 = document.getElementById("width1").value;
 	var width2 = document.getElementById("width2").value;
-	var rangeMin = 5, rangeMax = 10; 
+//Далі механізм рандому
+/*	var rangeMin = 5, rangeMax = 10; 
 //змінна з випадковим значенням від 1 до 5;	
 	var randomi = Math.floor((Math.random() * rangeMin) + 1); 
 //змінна з випадковим значенням від 1 до 10;
 	var randomi3 = Math.floor((Math.random() * rangeMax) + 1);
 //змінна з випадковим значенням, від 5 до 10;
-	var randomi2 = Math.floor(Math.random() * (rangeMax - rangeMin + 1) + rangeMin ); 
+	var randomi2 = Math.floor(Math.random() * (rangeMax - rangeMin + 1) + rangeMin ); */
 	var x = new Array(height);
 	for (var i = 0; i < x.length; i++) {
 		x[i] = new Array(width);
@@ -66,7 +81,8 @@ function initialize(x) {
 	for (i = 0; i < x.length; i++) {
 		for (var j = 0; j < x[i].length; j++) {
 			x[i][j] = false;
-			if (i == randomi3 && randomi < j && j < randomi2) {
+			/*if (i == randomi3 && randomi < j && j < randomi2) {*/ //механізм рандому
+			if (height1 < i && i < height2 && width1 < j && j < width2) {
 				x[i][j] = true;
 			}	
 		}	
