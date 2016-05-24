@@ -82,13 +82,16 @@ function initialize(x) {
 	var x = new Array(height);
 	for (var i = 0; i < x.length; i++) {
 		x[i] = new Array(width);
+		for (var j = 0; j < x[i].length; j++) { //створення об'єкта в клітинці
+			x[i][j] = {alive:false, frames:0};
+		}
 	}
 	for (i = 0; i < x.length; i++) {
 		for (var j = 0; j < x[i].length; j++) {
-			x[i][j] = false;
+			x[i][j].alive = false;
 			/*if (i == randomi3 && randomi < j && j < randomi2) {*/ //механізм рандому
 			if (height1 < i && i < height2 && width1 < j && j < width2) {
-				x[i][j] = true;
+				x[i][j].alive = true;
 			}	
 		}	
 	}
@@ -100,44 +103,49 @@ function controller() {
 	data = business_logic_life(data);
 }
 
+
+
 function business_logic_life(data) {
 	var w = data[0].length;
 	var h = data.length;
 	var new_life = new Array(h);
 	for (var i = 0; i < new_life.length; i++) {
 		new_life[i] = new Array(w);
+		for (var j = 0; j < new_life[i].length; j++) {//створення об'єкта в клітинці
+			new_life[i][j] = {alive:false, frames:0};
+		}
 	}	
 	for (i = 0; i < h; i++) {
 		for (var j = 0; j < w; j++) {   
 			var c = 0;
-			if (j != 0 && i != 0 && data[i - 1][j - 1] == true) {
+			if (j != 0 && i != 0 && data[i - 1][j - 1].alive == true) {
 				c = c + 1;
-			} if (j != 0 && data[i][j - 1] == true) {
+			} if (j != 0 && data[i][j - 1].alive == true) {
 				c = c + 1;
-			} if (j != 0 && i != h - 1 && data[i + 1][j - 1] == true) {
+			} if (j != 0 && i != h - 1 && data[i + 1][j - 1].alive == true) {
 				c = c + 1;
-			} if (i != h - 1 && data[i + 1][j] == true) {
+			} if (i != h - 1 && data[i + 1][j].alive == true) {
 				c = c + 1;
-			} if (i != h - 1 && j != w - 1 && data[i + 1][j + 1] == true) {
+			} if (i != h - 1 && j != w - 1 && data[i + 1][j + 1].alive == true) {
 				c = c + 1;
-			} if (j != w - 1 && data[i][j + 1] == true) {
+			} if (j != w - 1 && data[i][j + 1].alive == true) {
 				c = c + 1;
-			} if (i != 0 && j != w - 1 && data[i - 1][j + 1] == true) {
+			} if (i != 0 && j != w - 1 && data[i - 1][j + 1].alive == true) {
 				c = c + 1;
-			} if (i != 0 && data[i - 1][j] == true) {
+			} if (i != 0 && data[i - 1][j].alive == true) {
 				c = c + 1;
 			} 
-			if (data[i][j] == true) {
+			if (data[i][j].alive == true) {
 				if (c == 2 || c == 3) {
-					new_life[i][j] = true;
+					new_life[i][j].alive = true;
 				} else {
-					new_life[i][j] = false;
+					new_life[i][j].alive = false;
 				}	
 			} else {
 				if (c == 3) {
-					new_life[i][j] = true;
+					new_life[i][j].alive = true;
 				} else {
-					new_life[i][j] = false;
+					new_life[i][j].alive = false;
 				}
 			}
 		}
@@ -149,7 +157,7 @@ function present(data, viewport) {
 	var viewport = document.getElementById("viewport");
 	for (var i = 0; i < height; i++) {
 		for (var j = 0; j < width; j++) {
-			if (data[i][j] == true) {
+			if (data[i][j].alive == true) {
 				viewport.rows[i].cells[j].style.backgroundColor = "yellowgreen";
 			} else {
 				viewport.rows[i].cells[j].style.backgroundColor = "#003300";
