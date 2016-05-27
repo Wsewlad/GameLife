@@ -66,6 +66,11 @@ function stop() {
 	clearInterval(stopInt);
 }
 
+function cell_info(aliveOrDead, frame) {
+    this.alive = aliveOrDead;
+    this.frames = frame;
+}
+
 function initialize(x) {
 	var height1 = document.getElementById("height1").value;
 	var height2 = document.getElementById("height2").value;
@@ -83,7 +88,7 @@ function initialize(x) {
 	for (var i = 0; i < x.length; i++) {
 		x[i] = new Array(width);
 		for (var j = 0; j < x[i].length; j++) { //створення об'єкта в клітинці
-			x[i][j] = {alive:false, frames:0};
+			x[i][j] = new cell_info(false, 0); //{alive:false, frames:0}
 		}
 	}
 	for (i = 0; i < x.length; i++) {
@@ -112,7 +117,7 @@ function business_logic_life(data) {
 	for (var i = 0; i < new_life.length; i++) {
 		new_life[i] = new Array(w);
 		for (var j = 0; j < new_life[i].length; j++) {//створення об'єкта в клітинці
-			new_life[i][j] = {alive:false, frames:0};
+			new_life[i][j] = new cell_info(false, 0); //{alive:false, frames:0};
 		}
 	}	
 	for (i = 0; i < h; i++) {
