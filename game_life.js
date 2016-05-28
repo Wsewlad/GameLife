@@ -1,6 +1,6 @@
 ﻿
-var height = 10;
-var width = 10;
+var height = 30;
+var width = 30;
 var data;
 var stopInt;
 //перезавантажує сторінку
@@ -53,13 +53,13 @@ function populate_table(table, height, width) {
 		}
 	}
 }
-	
+
 /*window.onload = */function start() {
 	var viewport = document.getElementById("viewport");
 	populate_table(viewport, height, width);
 	data = initialize(data);
 	//console.log(JSON.stringify(data));
-	stopInt = setInterval(controller, 1000);
+	stopInt = setInterval(controller, 500);
 }
 
 function stop() {
@@ -94,7 +94,7 @@ function initialize(x) {
 	for (i = 0; i < x.length; i++) {
 		for (var j = 0; j < x[i].length; j++) {
 			x[i][j].alive = false;
-			/*if (i == randomi3 && randomi < j && j < randomi2) {*/ //механізм рандому
+			/*if (i == randomi3 || randomi < j && j < randomi2) {*/ //механізм рандому
 			if (height1 < i && i < height2 && width1 < j && j < width2) {
 				x[i][j].alive = true;
 			}	
@@ -107,8 +107,6 @@ function controller() {
 	present(data, viewport);
 	data = business_logic_life(data);
 }
-
-
 
 function business_logic_life(data) {
 	var w = data[0].length;
@@ -143,14 +141,18 @@ function business_logic_life(data) {
 			if (data[i][j].alive == true) {
 				if (c == 2 || c == 3) {
 					new_life[i][j].alive = true;
+					new_life[i][j].frames = data[i][j].frames + 1;
 				} else {
 					new_life[i][j].alive = false;
+					new_life[i][j].frames = 0;
 				}	
 			} else {
 				if (c == 3) {
 					new_life[i][j].alive = true;
+					new_life[i][j].frames = 0;
 				} else {
 					new_life[i][j].alive = false;
+					new_life[i][j].frames = data[i][j].frames + 1;
 				}
 			}
 		}
@@ -162,11 +164,18 @@ function present(data, viewport) {
 	var viewport = document.getElementById("viewport");
 	for (var i = 0; i < height; i++) {
 		for (var j = 0; j < width; j++) {
-			if (data[i][j].alive == true) {
-				viewport.rows[i].cells[j].style.backgroundColor = "yellowgreen";
+			var lightness = Math.max(100 - 10 * Math.sqrt(data[i][j].frames + 1), 40);
+			if (data[i][j].alive == true) { 
+				viewport.rows[i].cells[j].style.backgroundColor = "hsl(240, 100%, " + 
+				lightness + "%)";
 			} else {
-				viewport.rows[i].cells[j].style.backgroundColor = "#003300";
+				viewport.rows[i].cells[j].style.backgroundColor = "hsl(60, 100%, " + 
+				lightness + "%)";
 			}
 		}
 	}
 }
+//HSL stands for Hue(відтінок), Saturation(насичення), and Lightness(яскравість)
+/*Hue is a degree on the color wheel (from 0 to 360) - 0 (or 360) is red, 120 is green, 240 is blue. 
+Saturation is a percentage value; 0% means a shade of gray and 100% is the full color. Lightness is also a percentage; 
+0% is black, 100% is white.*/
