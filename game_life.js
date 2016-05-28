@@ -165,8 +165,6 @@ function present(data, viewport) {
 	for (var i = 0; i < height; i++) {
 		for (var j = 0; j < width; j++) {
 			var lightness = Math.max(100 - 10 * Math.sqrt(data[i][j].frames + 1), 40);
-			if (lightness > 80)
-				console.log(lightness);
 			if (data[i][j].alive == true) { 
 				viewport.rows[i].cells[j].style.backgroundColor = "hsl(240, 100%, " + 
 				lightness + "%)";
