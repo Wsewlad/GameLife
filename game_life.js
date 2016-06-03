@@ -72,17 +72,19 @@ function cell_info(aliveOrDead, frame) {
 }
 
 function initialize(x) {
+	setCookies([ "height1", "height2", "width1", "width2" ]);
+	getCookies();
 	var height1 = document.getElementById("height1").value;
 	var height2 = document.getElementById("height2").value;
 	var width1 = document.getElementById("width1").value;
 	var width2 = document.getElementById("width2").value;
 //Далі механізм рандому
-/*	var rangeMin = 5, rangeMax = 10; 
-//змінна з випадковим значенням від 1 до 5;	
+	/*var rangeMin = height / 2, rangeMax = height - 1; 
+//змінна з випадковим значенням від 1 до 50;	
 	var randomi = Math.floor((Math.random() * rangeMin) + 1); 
-//змінна з випадковим значенням від 1 до 10;
+//змінна з випадковим значенням від 1 до 99;
 	var randomi3 = Math.floor((Math.random() * rangeMax) + 1);
-//змінна з випадковим значенням, від 5 до 10;
+//змінна з випадковим значенням, від 50 до 99;
 	var randomi2 = Math.floor(Math.random() * (rangeMax - rangeMin + 1) + rangeMin ); */
 	var x = new Array(height);
 	for (var i = 0; i < x.length; i++) {
@@ -94,8 +96,8 @@ function initialize(x) {
 	for (i = 0; i < x.length; i++) {
 		for (var j = 0; j < x[i].length; j++) {
 			x[i][j].alive = false;
-			/*if (i == randomi3 || randomi < j && j < randomi2) {*/ //механізм рандому
-			if (height1 < i && i < height2 && width1 < j && j < width2) {
+			/*if (i == randomi3 && randomi < j && j < randomi2) {*/ //механізм рандому
+			if (height1 < i && i < height2 || width1 < j && j < width2) {
 				x[i][j].alive = true;
 			}	
 		}	
@@ -179,3 +181,28 @@ function present(data, viewport) {
 /*Hue is a degree on the color wheel (from 0 to 360) - 0 (or 360) is red, 120 is green, 240 is blue. 
 Saturation is a percentage value; 0% means a shade of gray and 100% is the full color. Lightness is also a percentage; 
 0% is black, 100% is white.*/
+function setCookies(cnames) {
+	var cstr = "";
+	for (var i=0; i<cnames.length; i++) {
+		if (document.getElementById(cnames[i]).value != "") {
+			if (cstr != "") cstr += ", ";
+			cstr += cnames[i] + "=" + document.getElementById(cnames[i]).value;
+		}
+	}
+	document.cookie = cstr;
+	console.log(document.cookie);
+}
+
+function getCookies() {
+    var ca = document.cookie.split(',');
+    for (var i = 0; i <ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') {
+            c = c.substring(1);
+        }
+		k = c.indexOf("=");
+		var name  = c.substring(0,k);
+		var value = c.substring(k+1,c.length);
+        document.getElementById(name).value = value;
+    }
+}
