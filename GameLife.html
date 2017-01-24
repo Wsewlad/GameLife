@@ -2,31 +2,31 @@
 <html>
   <head>
     <title>Game Life</title>
-	<link rel="stylesheet" href="game_life.css"> 
+	<link rel="stylesheet" href="game_life.css">
 	<script src="game_life.js"></script>
   </head>
-  <body>	
-		
-	<span id="mySpan"></span>
-	<h1 style="text-align:center; color: blue; ">
-		<input type="text" class ="input" id="height1" placeholder="Enter" onchange="check_input()"/>&lt; i i &lt;
-		<input type="text" class ="input" id="height2" placeholder="Enter"  onchange="check_input()"/>
-	</h1>
+  <body>
+
+	<div id="myDiv"></div>
+	<p id="input-label">Введіть координати по висоті <br>
+		<input type="number" class ="input" id="height1" placeholder="Enter" value="2" onchange="check_input()"/> &lt; i i &lt;
+		<input type="number" class ="input" id="height2" placeholder="Enter" value="29" onchange="check_input()"/>
+	</p>
 
 	<div style="text-align:center">
-		<button type="button" class ="buttonStart" id="buttonStart" onclick="disabled_button_start()">Start!</button>
-		<button type="button" class ="buttonStop" id="buttonStop" onclick="disabled_button_stop()" disabled >Stop!</button>
-		<button type="button" class ="buttonReload" id="buttonReload" onclick="reload()">Reload!</button>
+		<button type="button" class="Start btn" id="buttonStart" onclick="disabled_button_start()">Start!</button>
+		<button type="button" class="Stop btn" id="buttonStop" onclick="disabled_button_stop()" disabled >Stop!</button>
+		<button type="button" class="Reload btn" id="buttonReload" onclick="reload()">Reload!</button>
 	</div>
 
-	<h1 style="text-align:center; color: blue;">
-		<input type="text" class ="input" id="width1" placeholder="Enter"  onchange="check_input()"/>&lt; j j &lt;
-		<input type="text" class ="input" id="width2" placeholder="Enter"  onchange="check_input()"/>
-	</h1>	
+	<p id="input-label">Введіть координти по ширині <br>
+		<input type="number" class ="input" id="width1" placeholder="Enter" value="2" onchange="check_input()"/> &lt; j j &lt;
+		<input type="number" class ="input" id="width2" placeholder="Enter" value="29" onchange="check_input()"/>
+	</p>
 
-	<table id="viewport" cellpadding="0" cellspacing="0" 
+	<table id="viewport" cellpadding="0" cellspacing="0"
 	style="border:1px solid;">
 	</table>
-  
+
   </body>
 </html>

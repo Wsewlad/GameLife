@@ -1,36 +1,45 @@
 ﻿body {
-	background-color: #00CC00 ;
+	background-color: #f1b7ed;
 }
 table {
-	text-align: center;
+	margin: 0 auto;
 }
-.cell {	
+.cell {
 	width: 15px;
 	height: 15px;
 	padding: 0px;
 }
-#mySpan {
-	color: white;
-	text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
-	font-size:150px; 
-	float: left; 	
+#myDiv {
+	color: #edf1b7;
+	font-size:50px;
+	text-align: center;
 }
 .input {
-	height:30px; 
+	height:50px;
 	width:50px;
+	text-align: center;
+	font-size: 24px;
+	font-weight: bold;
+	color: blue;
+	border-radius: 50%;
+	background-color: #edf1b7;
 }
-.buttonStart {
-	height:30px; 
-	width:150px; 
+.btn {
+	background-color: #edf1b7;
+	height:30px;
+	width:150px;
+}
+.Start {
 	color: blue;
 }
-.buttonStop {
-	height:30px; 
-	width:150px; 
+.Stop {
 	color: red;
 }
-.buttonReload {
-	height:30px; 
-	width:150px; 
+.Reload {
 	color: green;
+}
+
+#input-label {
+	text-align: center;
+	color: blue;
 }

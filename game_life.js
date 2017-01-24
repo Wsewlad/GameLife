@@ -9,7 +9,7 @@ function reload() {
 }
 
 window.onload = function() { //виводить напис з розмірами таблиці
-	document.getElementById("mySpan").innerHTML = height + "x" + width;
+	document.getElementById("myDiv").innerHTML = "Розмір поля " + height + "x" + width + " клітинок";
 }
 
 function disable_button(buttonName) {
@@ -37,9 +37,9 @@ function check_input() {
 	if (height1 < 0 || width1 < 0) {
 		alert("You have entered wrong value in fields for 'i' or 'j' !!! Value for 'i' or 'j' must be >= 0. ");
 	} if (height2 > height || width2 > width) {
-		alert("You have entered wrong value in fields for 'i' or 'j' !!! Value for 'i' must be <= " + height + "." + 
+		alert("You have entered wrong value in fields for 'i' or 'j' !!! Value for 'i' must be <= " + height + "." +
 			  " Value for 'j' must be <= " + width + ".");
-	}	
+	}
 }
 
 function populate_table(table, height, width) {
@@ -72,19 +72,17 @@ function cell_info(aliveOrDead, frame) {
 }
 
 function initialize(x) {
-	setCookies([ "height1", "height2", "width1", "width2" ]);
-	getCookies();
 	var height1 = document.getElementById("height1").value;
 	var height2 = document.getElementById("height2").value;
 	var width1 = document.getElementById("width1").value;
 	var width2 = document.getElementById("width2").value;
 //Далі механізм рандому
-	/*var rangeMin = height / 2, rangeMax = height - 1; 
-//змінна з випадковим значенням від 1 до 50;	
-	var randomi = Math.floor((Math.random() * rangeMin) + 1); 
-//змінна з випадковим значенням від 1 до 99;
+/*	var rangeMin = 5, rangeMax = 10;
+//змінна з випадковим значенням від 1 до 5;
+	var randomi = Math.floor((Math.random() * rangeMin) + 1);
+//змінна з випадковим значенням від 1 до 10;
 	var randomi3 = Math.floor((Math.random() * rangeMax) + 1);
-//змінна з випадковим значенням, від 50 до 99;
+//змінна з випадковим значенням, від 5 до 10;
 	var randomi2 = Math.floor(Math.random() * (rangeMax - rangeMin + 1) + rangeMin ); */
 	var x = new Array(height);
 	for (var i = 0; i < x.length; i++) {
@@ -96,11 +94,11 @@ function initialize(x) {
 	for (i = 0; i < x.length; i++) {
 		for (var j = 0; j < x[i].length; j++) {
 			x[i][j].alive = false;
-			/*if (i == randomi3 && randomi < j && j < randomi2) {*/ //механізм рандому
-			if (height1 < i && i < height2 || width1 < j && j < width2) {
+			/*if (i == randomi3 || randomi < j && j < randomi2) {*/ //механізм рандому
+			if (height1 < i && i < height2 && width1 < j && j < width2) {
 				x[i][j].alive = true;
-			}	
-		}	
+			}
+		}
 	}
 	return x;
 }
@@ -119,9 +117,9 @@ function business_logic_life(data) {
 		for (var j = 0; j < new_life[i].length; j++) {//створення об'єкта в клітинці
 			new_life[i][j] = new cell_info(false, 0); //{alive:false, frames:0};
 		}
-	}	
+	}
 	for (i = 0; i < h; i++) {
-		for (var j = 0; j < w; j++) {   
+		for (var j = 0; j < w; j++) {
 			var c = 0;
 			if (j != 0 && i != 0 && data[i - 1][j - 1].alive == true) {
 				c = c + 1;
@@ -139,7 +137,7 @@ function business_logic_life(data) {
 				c = c + 1;
 			} if (i != 0 && data[i - 1][j].alive == true) {
 				c = c + 1;
-			} 
+			}
 			if (data[i][j].alive == true) {
 				if (c == 2 || c == 3) {
 					new_life[i][j].alive = true;
@@ -147,7 +145,7 @@ function business_logic_life(data) {
 				} else {
 					new_life[i][j].alive = false;
 					new_life[i][j].frames = 0;
-				}	
+				}
 			} else {
 				if (c == 3) {
 					new_life[i][j].alive = true;
@@ -167,42 +165,17 @@ function present(data, viewport) {
 	for (var i = 0; i < height; i++) {
 		for (var j = 0; j < width; j++) {
 			var lightness = Math.max(100 - 10 * Math.sqrt(data[i][j].frames + 1), 40);
-			if (data[i][j].alive == true) { 
-				viewport.rows[i].cells[j].style.backgroundColor = "hsl(240, 100%, " + 
+			if (data[i][j].alive == true) {
+				viewport.rows[i].cells[j].style.backgroundColor = "hsl(240, 100%, " +
 				lightness + "%)";
 			} else {
-				viewport.rows[i].cells[j].style.backgroundColor = "hsl(60, 100%, " + 
+				viewport.rows[i].cells[j].style.backgroundColor = "hsl(60, 100%, " +
 				lightness + "%)";
 			}
 		}
 	}
 }
 //HSL stands for Hue(відтінок), Saturation(насичення), and Lightness(яскравість)
-/*Hue is a degree on the color wheel (from 0 to 360) - 0 (or 360) is red, 120 is green, 240 is blue. 
-Saturation is a percentage value; 0% means a shade of gray and 100% is the full color. Lightness is also a percentage; 
+/*Hue is a degree on the color wheel (from 0 to 360) - 0 (or 360) is red, 120 is green, 240 is blue.
+Saturation is a percentage value; 0% means a shade of gray and 100% is the full color. Lightness is also a percentage;
 0% is black, 100% is white.*/
-function setCookies(cnames) {
-	var cstr = "";
-	for (var i=0; i<cnames.length; i++) {
-		if (document.getElementById(cnames[i]).value != "") {
-			if (cstr != "") cstr += ", ";
-			cstr += cnames[i] + "=" + document.getElementById(cnames[i]).value;
-		}
-	}
-	document.cookie = cstr;
-	console.log(document.cookie);
-}
-
-function getCookies() {
-    var ca = document.cookie.split(',');
-    for (var i = 0; i <ca.length; i++) {
-        var c = ca[i];
-        while (c.charAt(0)==' ') {
-            c = c.substring(1);
-        }
-		k = c.indexOf("=");
-		var name  = c.substring(0,k);
-		var value = c.substring(k+1,c.length);
-        document.getElementById(name).value = value;
-    }
-}
